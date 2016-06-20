@@ -1,0 +1,10 @@
+<resources>
+
+    <color name="color_gray_d9d9d9">#d9d9d9</color>
+    <color name="color_split_line_d9d9d9">#d9d9d9</color>
+    <color name="color_split_line_cccccc">#cccccc</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+
+</resources>

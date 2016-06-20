@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SendMessage</string>
+    <string name="title_activity_send_message_demo">SendMessageDemo</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="empty"></string>
+    <string name="record_audio">按住 说话</string>
+</resources>

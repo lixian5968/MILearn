@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PhotoLibrary</string>
+    <string name="title_activity_video_demo">VideoDemo</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main222">Main222Activity</string>
+</resources>
