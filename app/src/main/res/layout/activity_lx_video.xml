@@ -8,10 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true">
-        <SurfaceView
+        <!--<SurfaceView-->
+            <!--android:id="@+id/videoView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+
+        <com.lx.milearn.Demo4.LxSurfaceView.LxSurfaceView
             android:id="@+id/videoView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+
     </RelativeLayout>
 
 
@@ -79,6 +86,13 @@
             android:layout_centerInParent="true"
             android:layout_width="300dp"
             android:layout_height="300dp" />
+
+
+        <TextView
+            android:id="@+id/mTextView"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
     </RelativeLayout>

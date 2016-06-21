@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
@@ -13,21 +16,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lx.milearn.Demo4.LxSurfaceView.LxSurfaceView;
 import com.lx.milearn.R;
 import com.lx.sendmessage.log.LogUtil;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class LxVideoActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+public class LxVideoActivity2 extends AppCompatActivity implements SurfaceHolder.Callback {
 
     public void click(View v) {
         mBezier4.start();
@@ -43,15 +45,19 @@ public class LxVideoActivity extends AppCompatActivity implements SurfaceHolder.
 
 
     public void getImage(View v) {
+//        surfaceview;
+//        camera;
+        Log.e("", "");
 
-//        Bitmap mBitmap = Bitmap.createBitmap(mImageView.getMeasuredWidth(), mImageView.getMeasuredHeight(), Bitmap.Config.RGB_565);
-//        Canvas canvas = surfaceHolder.lockCanvas();
-//        if(canvas!=null){
-//            Paint p = new Paint();
-//            p.setColor(Color.BLACK);
-//            canvas.drawBitmap(mBitmap, mImageView.getMeasuredWidth(), mImageView.getMeasuredHeight(), p);
-//            mImageView.setImageBitmap(mBitmap);
-//        }
+        Bitmap mBitmap = Bitmap.createBitmap(mImageView.getMeasuredWidth(), mImageView.getMeasuredHeight(), Bitmap.Config.RGB_565);
+        Canvas canvas = surfaceHolder.lockCanvas();
+
+        Paint p = new Paint();
+        p.setColor(Color.BLACK);
+        canvas.drawBitmap(mBitmap, mImageView.getMeasuredWidth(), mImageView.getMeasuredHeight(), p);
+
+
+        mImageView.setImageBitmap(mBitmap);
 
 
 //        // 在捕获图片前进行自动对焦
@@ -63,7 +69,7 @@ public class LxVideoActivity extends AppCompatActivity implements SurfaceHolder.
 //            }
 //        });
 
-        camera.takePicture(null, null, mPicture);
+//        camera.takePicture(null, null, mPicture);
 
     }
 
@@ -73,22 +79,8 @@ public class LxVideoActivity extends AppCompatActivity implements SurfaceHolder.
 
              /* 取得相片 */
             Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
-
-            int w = 50;
-            int h = 50;
-            int[] pixels = new int[w * h];
-            bm.getPixels(pixels, 0, w, bm.getWidth() / 2 - w/2, bm.getHeight() / 2 - h/2, w, h);
-            Bitmap mBitmap3 = Bitmap.createBitmap(pixels, 0, w, w, h, Bitmap.Config.ARGB_8888);
-
-
-            int centerPixel = bm.getPixel(bm.getWidth() / 2, bm.getHeight() / 2);
-
-
-            mImageView.setImageBitmap(mBitmap3);
-
-
-            mTextView.setText(centerPixel + "");
-
+            mImageView.setImageBitmap(bm);
+            Log.e("lx", "wait");
 
             shutdownCamera();
             if (!initCamera())
@@ -99,11 +91,10 @@ public class LxVideoActivity extends AppCompatActivity implements SurfaceHolder.
 
 
     private static final String TAG = "video";
-    LxSurfaceView surfaceview;
+    SurfaceView surfaceview;
     private SurfaceHolder surfaceHolder;
     Bezier4 mBezier4;
     ImageView mImageView;
-    TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,14 +102,13 @@ public class LxVideoActivity extends AppCompatActivity implements SurfaceHolder.
         setContentView(R.layout.activity_lx_video);
         mBezier4 = (Bezier4) this.findViewById(R.id.mBezier4);
         mImageView = (ImageView) this.findViewById(R.id.mImageView);
-        mTextView = (TextView) this.findViewById(R.id.mTextView);
 
 
         getVideoPreviewSize();
-        surfaceview = (LxSurfaceView) this.findViewById(R.id.videoView);
+        surfaceview = (SurfaceView) this.findViewById(R.id.videoView);
         SurfaceHolder holder = surfaceview.getHolder();
-        holder.addCallback(this);
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        holder.addCallback(this);
         resizeSurfaceView();
 
     }
@@ -159,13 +149,7 @@ public class LxVideoActivity extends AppCompatActivity implements SurfaceHolder.
 
     public void surfaceCreated(SurfaceHolder holder) {
         surfaceHolder = holder;
-//        Canvas canvas = surfaceHolder.lockCanvas();
-//
-//        if(canvas!=null){
-//            Log.e("lx","canvas !=null");
-//        }else{
-//            Log.e("lx","canvas ==null");
-//        }
+
 
         shutdownCamera();
         if (!initCamera())
@@ -199,7 +183,6 @@ public class LxVideoActivity extends AppCompatActivity implements SurfaceHolder.
                 camera = Camera.open();
             }
         } catch (RuntimeException e) {
-            Log.e("lx", e.getMessage());
             LogUtil.e(TAG, "init camera failed: " + e);
             Toast.makeText(this, R.string.connect_vedio_device_fail, Toast.LENGTH_SHORT).show();
             return false;
@@ -426,7 +409,7 @@ public class LxVideoActivity extends AppCompatActivity implements SurfaceHolder.
     }
 
     protected boolean isCompatible(int apiLevel) {
-        return android.os.Build.VERSION.SDK_INT >= apiLevel;
+        return Build.VERSION.SDK_INT >= apiLevel;
     }
 
 }
