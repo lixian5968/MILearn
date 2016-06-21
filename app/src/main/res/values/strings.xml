@@ -38,5 +38,8 @@
     <string name="title_activity_video_activity_demo">VideoActivityDemo</string>
     <string name="title_activity_lx_video">LxVideoActivity</string>
     <string name="title_activity_all">AllActivity</string>
+    <string name="title_activity_main5">Main5Activity</string>
+    <string name="title_activity_main5_activity_demo2">Main5ActivityDemo2</string>
+    <string name="title_activity_input_demo">InputDemoActivity</string>
 
 </resources>
